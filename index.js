@@ -36,26 +36,31 @@ const checkProductInfo = () => {
   if (index === -1) {
     console.log("Product ID not found");
   } else {
-    var inOrOut = rs.question("Is this in or out?");
+    const inOrOut = rs.question("Is this in or out?").trim().toLowerCase();
+    if (inOrOut !== "in" && inOrOut !== "out") {
+      console.log("No Option");
+      return;
+    }
+
+    const amount = rs.questionInt("How many? ");
     switch (inOrOut) {
       case "in":
-        var amount = rs.questionInt("How many? ");
-        inventories[index].stock = inventories[index].stock + amount;
+        inventories[index].stock += amount;
         console.log("Updated");
         listProduct();
         break;
       case "out":
-        var amount = rs.questionInt("How many? ");
-        if (amount > 0) {
-          inventories[index].stock = inventories[index].stock - amount;
-        } else {
+        if (amount <= 0) {
           console.log("Sorry, stock is below 1");
+        } else if (inventories[index].stock >= amount) {
+          inventories[index].stock -= amount;
+          console.log("Updated");
+          listProduct();
+        } else {
+          console.log(
+            `Sorry, insufficient stock! Current stock is only ${inventories[index].stock}.`,
+          );
         }
-        console.log("Updated");
-        listProduct();
-        break;
-      default:
-        console.log("Option not found");
         break;
     }
   }
@@ -100,7 +105,7 @@ const menuSwitcher = (menu) => {
 while (!isExit) {
   if (isMainMenu) {
     displayMenu();
-    var menu = rs.questionInt("Please choose a menu:");
+    const menu = rs.questionInt("Please choose a menu:");
     menuSwitcher(menu);
   }
 }
