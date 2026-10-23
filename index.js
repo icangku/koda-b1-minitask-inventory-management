@@ -23,7 +23,7 @@ const addProduct = (product) => {
 const listProduct = () => {
   let inventoriesStr = ``;
   inventories.forEach((product) => {
-    inventoriesStr += `\n[${product.id.toString().padEnd(4)}] ${product.name.toString().padEnd(30)}${product.stock.toString()} pc(s)`;
+    inventoriesStr += `\n[${product.id.padEnd(4)}] ${product.name.toString().padEnd(30)}${product.stock} pc(s)`;
   });
   console.log(inventoriesStr);
 };
