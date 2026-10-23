@@ -99,8 +99,16 @@ const menuSwitcher = (menu) => {
     case 2:
       checkProductInfo();
       break;
-  }
-};
+    case 4:
+      searchProduct();
+      break;
+    default:
+      displayMenu();
+}};
+
+const searchProduct = () => {
+  console.log(`console's here!`)
+}
 
 while (!isExit) {
   if (isMainMenu) {
