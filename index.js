@@ -22,8 +22,8 @@ const addProduct = (product) => {
 
 const listProduct = () => {
   let inventoriesStr = ``;
-  inventories.forEach((inv) => {
-    inventoriesStr += `\n[${inv.id.toString().padEnd(4)}] ${inv.name.toString().padEnd(30)}${inv.stock.toString().padEnd(5)}pc(s)`;
+  inventories.forEach((product) => {
+    inventoriesStr += `\n[${product.id.toString().padEnd(4)}] ${product.name.toString().padEnd(30)}${product.stock.toString()} pc(s)`;
   });
   console.log(inventoriesStr);
 };
@@ -98,6 +98,9 @@ const menuSwitcher = (menu) => {
       break;
     case 2:
       checkProductInfo();
+      break;
+    case 3:
+      listProduct();
       break;
   }
 };
