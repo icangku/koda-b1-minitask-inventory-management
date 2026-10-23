@@ -107,8 +107,29 @@ const menuSwitcher = (menu) => {
 }};
 
 const searchProduct = () => {
-  console.log(`console's here!`)
-}
+  const input = rs.question("Search product name: ").trim();
+  const keyword = input.toLowerCase();
+
+  if (keyword === "") {
+    console.log("Keyword cannot be empty");
+    return;
+  }
+
+  const results = inventories.filter((inv) =>
+    String(inv.name).toLowerCase().includes(keyword),
+  );
+
+  if (results.length === 0) {
+    console.log(`Product "${input}" not found`);
+    return;
+  }
+
+  let resultsStr = ``;
+  results.forEach((inv) => {
+    resultsStr += `\n[${inv.id.toString().padEnd(4)}] ${inv.name.toString().padEnd(30)}${inv.stock.toString().padEnd(5)}pc(s)`;
+  });
+  console.log(`\nFound ${results.length} product(s):${resultsStr}`);
+};
 
 while (!isExit) {
   if (isMainMenu) {
