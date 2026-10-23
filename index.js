@@ -22,8 +22,8 @@ const addProduct = (product) => {
 
 const listProduct = () => {
   let inventoriesStr = ``;
-  inventories.forEach((inv) => {
-    inventoriesStr += `\n[${inv.id.toString().padEnd(4)}] ${inv.name.toString().padEnd(30)}${inv.stock.toString().padEnd(5)}pc(s)`;
+  inventories.forEach((product) => {
+    inventoriesStr += `\n[${product.id.padEnd(4)}] ${product.name.toString().padEnd(30)}${product.stock} pc(s)`;
   });
   console.log(inventoriesStr);
 };
@@ -99,6 +99,9 @@ const menuSwitcher = (menu) => {
     case 2:
       checkProductInfo();
       break;
+    case 3:
+      listProduct();
+    break;
     case 4:
       searchProduct();
       break;
@@ -113,6 +116,7 @@ const searchProduct = () => {
   if (keyword === "") {
     console.log("Keyword cannot be empty");
     return;
+    
   }
 
   const results = inventories.filter((inv) =>
